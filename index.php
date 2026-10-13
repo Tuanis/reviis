@@ -243,7 +243,6 @@ if (isset($_GET['fragment'])) {
 <body>
 <div class="wrap">
   <header>
-    <a href="../index.php">Back</a>
     <h1>How much do you need to drink?</h1>
     <p>Enter the inside measurements of your cup to see how high it must be filled to hold one reviis (רביעית).</p>
   </header>
