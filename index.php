@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /*
- * How much do you need to drink? (a cup and a reviis)
+ * How much do you need to drink? (a cup and a revi'is)
  * Single file: PHP does all the maths and drawing. With JavaScript the page
  * updates live by asking this same file for just the result (?fragment=1);
  * without JavaScript the "Show result" button submits the form normally.
@@ -125,19 +125,18 @@ function render_result(float $top, float $bottom, float $h, array $notes): strin
         echo '<p class="note" role="alert">', htmlspecialchars($note), '</p>';
     }
     echo draw_cup($top, $bottom, $h, $levels);
-    echo '<p class="total">This cup holds ', n($g['volume'], 0), ' cm<sup>3</sup> when full, ', n($h), ' cm tall.</p>';
+    echo '<p class="total">This cup holds ', n($g['volume'], 0), ' cc when full, ', n($h), ' cm tall.</p>';
     echo '<div class="readings">';
     foreach (OPINIONS as $id => $o) {
         echo '<section class="reading ', $id, '"><h3>', htmlspecialchars($o['name']), '</h3>';
-        echo '<p class="vol">1 reviis = ', n($o['vol'], 0), ' cm<sup>3</sup></p>';
+        echo '<p class="vol">Required volume: ', n($o['vol'], 0), ' cc (about ', n($o['vol'] / 29.5735), ' US fl oz) for one revi\'is</p>';
         if (isset($levels[$id])) {
-            $lv = $levels[$id];
-            echo '<p class="big">', n($lv), '<span> cm</span></p>';
-            echo '<p class="meta">from the inside bottom. That is ', n($lv / $h * 100, 0), '% of the height but ',
-                n($o['vol'] / $g['volume'] * 100, 0), '% of the volume.</p>';
+            echo '<p class="meta">Fill this cup to:</p>';
+            echo '<p class="big">', n($levels[$id]), '<span> cm</span></p>';
+            echo '<p class="meta">above the inside bottom</p>';
         } else {
             echo '<p class="meta warn">This cup holds only ', n($g['volume'], 0),
-                ' cm<sup>3</sup>, which is less than one reviis by this opinion.</p>';
+                ' cc, which is less than one revi\'is by this opinion.</p>';
         }
         echo '</section>';
     }
@@ -168,7 +167,7 @@ if (isset($_GET['fragment'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>How much do you need to drink? | Reviis cup calculator</title>
+  <title>How much do you need to drink? | Revi'is cup calculator</title>
   <style>
     :root {
       --bg: #eef2f3; --panel: #ffffff; --ink: #14232b; --muted: #55666f; --line: #cfd9de;
@@ -244,7 +243,7 @@ if (isset($_GET['fragment'])) {
 <div class="wrap">
   <header>
     <h1>How much do you need to drink?</h1>
-    <p>Enter the inside measurements of your cup to see how high it must be filled to hold one reviis (רביעית).</p>
+    <p>Enter the inside measurements of your cup to see how high it must be filled to hold one revi'is (רביעית).</p>
   </header>
 
   <div class="layout">
@@ -272,8 +271,12 @@ if (isset($_GET['fragment'])) {
         <details>
           <summary>How is this calculated?</summary>
           <p>The cup is not a cylinder, so the volume does not grow evenly with height. Think of it as an upside-down cone whose tip (the <i>shpitz</i>) has been cut off.</p>
-          <p>Similar triangles give the full height of that cone from the cup's height and its two radii. The volume of a cone is V = &#8531;&pi;r<sup>2</sup>h, so subtracting the missing tip from the full cone gives the cup's volume, and solving the same formula for one reviis gives the fill height.</p>
-          <p>This is a geometric calculation only. Thick bases and curved sides change the real result, and halachic questions belong with your rabbi.</p>
+          <p>Similar triangles give the full height of that cone from the cup's height and its two radii.</p>
+          <p>The volume of a cone is V = &#8531;&pi;r<sup>2</sup>h, so subtracting the missing tip from the full cone gives the cup's volume, and solving the same formula for one revi'is gives the fill height.</p>
+          <p><b>Volume and height are different measurements.</b> The required volume (in cc) is how much liquid a revi'is is. The fill height (in cm) is how high that liquid reaches in <i>this</i> cup.</p>
+          <p>1 cc is the same as 1 cm<sup>3</sup> and 1 mL, and 1 US fluid ounce is about 29.6 cc.</p>
+          <p><b>Why isn't half the volume at half the height?</b> The cup is narrower at the bottom and wider at the top, so the lower part holds less liquid per centimeter. A revi'is therefore reaches a larger share of the cup's height than of its volume. In a straight-sided cup the two would match.</p>
+          <p>This is a geometric calculation only. Thick bases and curved sides change the real result, and halachic questions belong with your LOR.</p>
         </details>
       </div>
     </div>
