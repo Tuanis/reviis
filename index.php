@@ -274,7 +274,7 @@ $otherHref = '?' . http_build_query(['lang' => $otherLang, 'top' => n($top), 'bo
     header h1 {
       margin: 8px 0 4px; font: 600 clamp(1.8rem, 4vw, 2.6rem)/1.1 "Iowan Old Style", Palatino, Georgia, serif;
     }
-    header p.intro { margin: 0; color: var(--muted); max-width: 60ch; }
+    header p.intro { margin: 0; color: var(--muted); max-width: 90ch; }
     .layout { display: grid; grid-template-columns: minmax(260px, 340px) 1fr; gap: 24px; align-items: start; }
     @media (max-width: 760px) { .layout { grid-template-columns: 1fr; } }
     .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
